@@ -1,10 +1,14 @@
 import React from "react";
-import { useState} from 'react';
+import {useEffect, useState} from "react";
 
 const Location = () => {
     
     var [lat, setLat] = useState(null);
     var [long, setLong] = useState(null);
+
+    useEffect(() => {
+        getLocation();
+      }, [])
 
     function getLocation() {
         if (navigator.geolocation) {
@@ -43,7 +47,6 @@ const Location = () => {
 
 
 return <div>
-    <button onClick={getLocation}>Try It</button>
     <p id="demo">{lat}</p>
     <p id="demo">{long}</p>
     </div>

@@ -8,7 +8,7 @@ function profileCard(props) {
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-4by3">
-                        <img src="https://bulma.io/images/placeholders/360x240.png" alt="Placeholder image" />
+                        <img src="https://media.istockphoto.com/id/1198036466/vector/people-family-together-human-unity-chat-bubble-vector-icon.jpg?s=612x612&w=0&k=20&c=TAoPZDTuP3LABAzWv7jVVD-Sv7MxyztMQ2hGR3OyIQI=" alt="image" />
                     </figure>
                 </div>
                 <div class="card-content">
