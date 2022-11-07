@@ -3,10 +3,16 @@ import './App.css';
 import React, { useEffect, useState } from 'react';
 import LoginPage from './loginPage.js';
 import TestUser from './testDb.js';
-import Location from './locaiton.js'
+import Location from './locaiton.js';
+import ProfileCard from './profileCard.js'
+import { BrowserRouter as Router, Routes, Route}
+    from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
 function App() {
 
   const [data, setData] = useState({});
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     var responseClone; // 1
@@ -25,10 +31,15 @@ function App() {
     });
 })});
 
+  const navigate = useNavigate();
   return (
     <div>
-      <LoginPage></LoginPage>
-      <Location></Location>
+      <Router>
+      <Routes>
+        <Route exact path='/' element={<LoginPage />} />
+        <Route path='/main' element={<ProfileCard/>} />
+      </Routes>
+      </Router>
     </div>
   );
 }
