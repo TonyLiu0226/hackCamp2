@@ -10,9 +10,13 @@ import { BrowserRouter as Router, Routes, Route}
 import { useNavigate } from "react-router-dom";
 
 function App() {
-
+  const navigate = useNavigate();
   const [data, setData] = useState({});
-  const [user, setUser] = useState(null);
+  let [user, setUser] = useState(null);
+
+  const childToParent = (user)=> {
+    setUser(user);
+  }
 
   useEffect(() => {
     var responseClone; // 1
@@ -31,15 +35,21 @@ function App() {
     });
 })});
 
-  const navigate = useNavigate();
+useEffect(() => {
+  if (user) {
+    navigate('/main');
+  }
+  else {
+    navigate('./');
+  }
+}, [user]);
+
   return (
     <div>
-      <Router>
       <Routes>
-        <Route exact path='/' element={<LoginPage />} />
+        <Route exact path='/' element={<LoginPage childToParent={childToParent} />} />
         <Route path='/main' element={<ProfileCard/>} />
       </Routes>
-      </Router>
     </div>
   );
 }

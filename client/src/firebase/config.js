@@ -42,9 +42,10 @@ const db = firebaseApp.firestore();
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 const signInWithGoogle = async () => {
+  let user = null;
   try {
     const res = await signInWithPopup(auth, googleProvider);
-    const user = res.user;
+    user = res.user;
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
     const docs = await getDocs(q);
     if (docs.docs.length === 0) {
@@ -55,12 +56,14 @@ const signInWithGoogle = async () => {
         email: user.email,
       });
       //redirect user to /main page
-      
+
     }
   } catch (err) {
     console.error(err);
     alert(err.message);
     //redirect user to /
   }
+  console.log(user);
+  return user;
 };
 export { auth, db, signInWithGoogle };

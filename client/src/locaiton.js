@@ -1,14 +1,32 @@
 import React from "react";
 import {useEffect, useState} from "react";
-
-const Location = () => {
+import { db } from "./firebase/config.js";
+import firebase from 'firebase/compat/app';
+import {
+    setDoc,doc} from "firebase/firestore";
+const Location = (user) => {
     
     var [lat, setLat] = useState(null);
     var [long, setLong] = useState(null);
 
+
     useEffect(() => {
-        getLocation();
+        storeData();
       }, [])
+
+
+    async function storeData() {
+        getLocation();
+        console.log("location"+ user);
+        const docRef = doc(db, "users", user.uid);
+        setDoc(docRef, {
+            latitude: lat,
+            longitude: long
+        }, {
+
+        merge: true
+        }).then(() => console.log("Document updated"));
+    }
 
     function getLocation() {
         if (navigator.geolocation) {
